@@ -21,4 +21,17 @@
 
 - 모든 페이지와 컴포넌트의 정보가 다 포함되어 있기 때문이다.
 
-라우팅으로 사용할 라이브러리 : reactRouter
+라우팅으로 사용할 라이브러리 : reactRouter (npm i react-router-dom)
+
+2. index.css 에는 전반적인 디자인을 세팅한다.
+   폰트 및 전체에 적용되는 기본적인 디자인 세팅
+
+#root {
+background-color: white;
+max-width: 600px;
+width: 100%;
+margin: 0 auto;
+min-height: 100vh; // 여기서 말하는 vh는 현재 브라우저의 스크린 높이 (viewport height)
+height: 100%;
+box-shadow: rgba(100,100,100,0.2) 0px 0px 29px 0px;
+}
