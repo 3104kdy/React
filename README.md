@@ -58,3 +58,5 @@ box-shadow: rgba(100,100,100,0.2) 0px 0px 29px 0px;
      > > 해당 문법은 헤더 스타일 아래에 있는 모든 div 속성의 디자인을 정의하는 것
   2. justify-content: center;
      > > display 가 flex인 속성 안에서, 자식들이 배치되는 위치를 설정하는 것 (center는 가운데)
+- DiaryList 컴포넌트 구현
+- DiaryItem 컴포넌트 구현
