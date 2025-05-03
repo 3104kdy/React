@@ -11,15 +11,21 @@ import Edit from './pages/Edit';
 const mokData = [
   {
     id: 1,
-    createdDate: new Date().getTime(),
+    createdDate: new Date('2025-05-03').getTime(),
     emotionId: 1,
     content: '1번 일기 내용',
   },
   {
     id: 2,
-    createdDate: new Date().getTime(),
+    createdDate: new Date('2025-05-02').getTime(),
     emotionId: 2,
     content: '2번 일기 내용 222',
+  },
+  {
+    id: 3,
+    createdDate: new Date('2025-04-01').getTime(),
+    emotionId: 3,
+    content: '3번 일기 내용',
   },
 ];
 
@@ -39,9 +45,9 @@ function reducer(state, action) {
       return state;
   }
 }
-
-const DiaryStateContext = createContext();
-const DiaryDispatchContext = createContext();
+// Home 컴포넌트에서 DiaryStateContext를 통해서 데이터 공급을 받아와야 됨 ==> export
+export const DiaryStateContext = createContext();
+export const DiaryDispatchContext = createContext();
 
 function App() {
   // data라는 stat가 여러개의 일기를 보관하는 용도
@@ -84,28 +90,6 @@ function App() {
 
   return (
     <>
-      <button
-        onClick={() => {
-          onCreate(new Date().getTime(), 1, 'HI');
-        }}
-      >
-        일기 추가 테스트
-      </button>
-      <button
-        onClick={() => {
-          onUpdate(1, new Date().getTime(), 3, '!!!!!수정된 일기');
-        }}
-      >
-        일기 수정 테스트
-      </button>
-
-      <button
-        onClick={() => {
-          onDelete(1);
-        }}
-      >
-        일기 삭제 테스트
-      </button>
       <DiaryStateContext.Provider value={data}>
         <DiaryDispatchContext
           value={{
