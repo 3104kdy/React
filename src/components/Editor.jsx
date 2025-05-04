@@ -2,6 +2,7 @@ import './Editor.css';
 import EmotionItem from './EmotionItem';
 import Button from './Button';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const emotionList = [
   { emotionId: 1, emotionName: '완전 좋음' },
@@ -27,7 +28,10 @@ const getStringedDate = (targetDate) => {
   return `${year}-${month}-${date}`;
 };
 
-const Editor = () => {
+// Editor 컴포넌트는 New , Edit 모두 사용하고 있음
+const Editor = ({ onSubmit }) => {
+  const nav = useNavigate();
+
   // input이라는 하나의 state에 보관
   const [input, setInput] = useState({
     createdDate: new Date(),
@@ -49,6 +53,13 @@ const Editor = () => {
     });
   };
 
+  // 새로 작성한 Input을 받아서 new 컴포넌트에서 처리
+  const onClickSubmitButton = () => {
+    // 부모 컴포넌트로부터 받은 onSubmit 함수를 호출
+    onSubmit(input);
+  };
+
+  // 아래 '저장'버튼을 클릭하면, onClickSubmit이 작동됨
   return (
     <div className="Editor">
       <section className="date_section">
@@ -82,11 +93,21 @@ const Editor = () => {
       </section>
       <section className="content_section">
         <h4>오늘의 일기</h4>
-        <textarea placeholder="오늘은 어땠나요?"></textarea>
+        <textarea
+          name="content"
+          value={input.content}
+          onChange={onChangedInput}
+          placeholder="오늘은 어땠나요?"
+        ></textarea>
       </section>
       <section className="button_section">
-        <Button text={'취소'} />
-        <Button text={'저장'} type={'POSITIVE'} />
+        <Button
+          text={'취소'}
+          onClick={() => {
+            nav(-1);
+          }}
+        />
+        <Button onClick={onClickSubmitButton} text={'저장'} type={'POSITIVE'} />
       </section>
     </div>
   );
