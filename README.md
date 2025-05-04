@@ -60,3 +60,25 @@ box-shadow: rgba(100,100,100,0.2) 0px 0px 29px 0px;
      > > display 가 flex인 속성 안에서, 자식들이 배치되는 위치를 설정하는 것 (center는 가운데)
 - DiaryList 컴포넌트 구현
 - DiaryItem 컴포넌트 구현
+
+########################
+절대 경로 기능 추가
+
+1. jsconfig.json 파일 추가
+
+• 프로젝트 루트 디렉토리에 jsconfig.json 파일을 생성합니다.
+
+2. vite.config.js 파일에서 다음과 같이 설정합니다:
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+plugins: [react()],
+resolve: {
+alias: [{ find: '@', replacement: '/src' }], // '@'를 '/src' 폴더로 대체
+},
+})
+
+resolve 부분 추가
