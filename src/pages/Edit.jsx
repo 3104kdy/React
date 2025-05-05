@@ -1,35 +1,18 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { DiaryDispatchContext, DiaryStateContext } from '../App';
+import useDiary from '@/hooks/useDiary';
 
 // 절대경로로 import 시도
 import Button from '../components/Button';
 import Header from '@/components/Header';
 import Editor from '@/components/Editor';
-import { useNavigate } from 'react-router-dom';
 
 const Edit = () => {
   const nav = useNavigate();
   const params = useParams();
   const { onDelete, onUpdate } = useContext(DiaryDispatchContext);
-  const data = useContext(DiaryStateContext);
-  const [curDiaryItem, setCurDiaryItem] = useState();
-
-  useEffect(() => {
-    const currDiaryItem = data.find(
-      (item) => String(item.id) === String(params.id)
-    );
-
-    if (!currDiaryItem) {
-      window.alert('존재하지 않는 일기');
-      // navigate 함수는
-      // 컴포넌트들이 다 마운트가 된 이후에 동작함
-      nav('/', { replace: true });
-    }
-
-    setCurDiaryItem(currDiaryItem);
-    //onClickDelete 함수가 실행되고 나서도 useEffect가 진행됨
-  }, [params.id]); //useEffect 값이 비동기로 update되었기에, 의존성 배열에 data를 전달해주지 않는 방식으로 진행
+  const curDiaryItem = useDiary(params.id);
 
   const onClickDelete = () => {
     // window.confirm 에는 return 값이 boolean으로 존재함
